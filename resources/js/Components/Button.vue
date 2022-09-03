@@ -5,6 +5,7 @@ defineProps({
         default: 'submit',
     },
 });
+
 </script>
 
 <template>

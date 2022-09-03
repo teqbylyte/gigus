@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Gigs" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
@@ -17,7 +17,14 @@ defineProps({
                 Gigs
             </h2>
 
-            <Button><span aria-label="New gig">N<span class="lowercase">ew gig</span></span></Button>
+            <Link>
+                <Button type="button">
+                    <div class="flex justify-between w-20">
+                        <span aria-label="New gig" class="font-semibold">N<span class="lowercase">ew gig</span></span>
+                        <span class="font-bold"> + </span>
+                    </div>
+                </Button>
+            </Link>
         </template>
 
         <section>
@@ -58,10 +65,22 @@ defineProps({
                                 Company
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Date
+                                <span class="flex items-center">
+                                    <span>Date</span>
+                                    <span class="pl-1">
+                                        <Icon class="text-xs font-bold text-primary-500">arrow_upward</Icon>
+                                        <Icon class="text-xs font-bold text-primary-500">arrow_downward</Icon>
+                                    </span>
+                                </span>
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Salary($)
+                                <span class="flex items-center">
+                                    <span>Salary($)</span>
+                                    <span class="pl-1">
+                                        <Icon class="text-xs font-bold text-primary-500">arrow_upward</Icon>
+                                        <Icon class="text-xs font-bold  text-primary-500">arrow_downward</Icon>
+                                    </span>
+                                </span>
                             </th>
                         </tr>
                     </thead>
