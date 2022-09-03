@@ -6,6 +6,7 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import moment from "moment";
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'GIGUS';
 
@@ -21,7 +22,21 @@ createInertiaApp({
                     appName() {
                         return appName
                     },
-                }
+                },
+
+                methods: {
+                    formatDate(value, time = true, def = 'DD-MM-YYYY') {
+                        let format = time ? def + " HH:mm" : def
+
+                        if (value == null)
+                        { return 'Not specified' }
+                        else { return moment(value).format(format) }
+                    },
+
+                    formatMoney(value) {
+                        return new Intl.NumberFormat().format(value)
+                    }
+                },
             })
             .mount(el);
     },

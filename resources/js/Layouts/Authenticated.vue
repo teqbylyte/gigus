@@ -30,6 +30,10 @@ const showingNavigationDropdown = ref(false);
                                 <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </BreezeNavLink>
+
+                                <BreezeNavLink :href="route('gigs.index')" :active="route().current('gigs.index')">
+                                    Gigs
+                                </BreezeNavLink>
                             </div>
                         </div>
 
@@ -76,6 +80,9 @@ const showingNavigationDropdown = ref(false);
                         <BreezeResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </BreezeResponsiveNavLink>
+                        <BreezeResponsiveNavLink :href="route('gigs.index')" :active="route().current('gigs.index')">
+                            Gigs
+                        </BreezeResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -95,15 +102,24 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
+            <header class="mt-8" v-if="$slots.header">
+                <div class="max-w-7xl font-bold text-3xl text-gray-800 mx-auto pt-6 px-4 sm:px-6 lg:px-8">
+                    <div class="mx-2 sm:mx-12 flex justify-between">
+                        <slot name="header" />
+                    </div>
                 </div>
             </header>
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <div class="py-12">
+                    <div class="max-w-7xl mx-3 sm:mx-auto sm:px-6 lg:px-8">
+
+                        <!-- Insert Page Content -->
+                        <slot />
+
+                    </div>
+                </div>
             </main>
         </div>
     </div>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('state');
             $table->string('address');
+            $table->enum('status', ['pending', 'active', 'completed', 'rejected']);
             $table->float('min_salary')->from(1000);
             $table->float('max_salary')->from(1000);
             $table->timestamps();

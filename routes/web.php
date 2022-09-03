@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\GigController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,9 +15,12 @@ use Inertia\Inertia;
 |
 */
 
+Route::middleware('auth')->group(function () {
+    Route::get('/', fn() => Inertia::render('Dashboard'))->name('dashboard');
 
-Route::get('/', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::controller(GigController::class)->prefix('gigs')->name('gigs.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+});
 
 require __DIR__.'/auth.php';
