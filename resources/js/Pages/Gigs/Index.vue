@@ -17,18 +17,17 @@ defineProps({
                 Gigs
             </h2>
 
-            <Link>
+            <Link :href="route('gigs.create')">
                 <Button type="button">
                     <div class="flex justify-between w-20">
-                        <span aria-label="New gig" class="font-semibold">N<span class="lowercase">ew gig</span></span>
+                        <span aria-label="New gig">New gig</span>
                         <span class="font-bold"> + </span>
                     </div>
                 </Button>
             </Link>
         </template>
 
-        <section>
-
+        <section class="py-6">
 <!--            Gigs selection tab-->
             <div class="pb-10">
                 <div class="w-full flex justify-around sm:-my-px sm:flex border-b">

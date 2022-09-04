@@ -14,4 +14,9 @@ class GigController extends Controller
 
         return Inertia::render('Gigs/Index', compact('gigs'));
     }
+
+    public function create()
+    {
+        return Inertia::render('Gigs/Create');
+    }
 }

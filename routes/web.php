@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(GigController::class)->prefix('gigs')->name('gigs.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
     });
 });
 

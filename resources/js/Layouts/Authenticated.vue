@@ -31,7 +31,7 @@ const showingNavigationDropdown = ref(false);
                                     Dashboard
                                 </BreezeNavLink>
 
-                                <BreezeNavLink :href="route('gigs.index')" :active="route().current('gigs.index')">
+                                <BreezeNavLink :href="route('gigs.index')" :active="route().current('gigs.index') || route().current('gigs.create')">
                                     Gigs
                                 </BreezeNavLink>
                             </div>
@@ -80,7 +80,7 @@ const showingNavigationDropdown = ref(false);
                         <BreezeResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </BreezeResponsiveNavLink>
-                        <BreezeResponsiveNavLink :href="route('gigs.index')" :active="route().current('gigs.index')">
+                        <BreezeResponsiveNavLink :href="route('gigs.index')" :active="route().current('gigs.index') || route('gigs.create')">
                             Gigs
                         </BreezeResponsiveNavLink>
                     </div>
@@ -112,7 +112,7 @@ const showingNavigationDropdown = ref(false);
 
             <!-- Page Content -->
             <main>
-                <div class="py-12">
+                <div class="py-6">
                     <div class="max-w-7xl mx-3 sm:mx-auto sm:px-6 lg:px-8">
 
                         <!-- Insert Page Content -->
