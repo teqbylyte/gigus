@@ -20,10 +20,10 @@ return new class extends Migration
             $table->unsignedInteger('company_id');
             $table->string('country');
             $table->string('state');
-            $table->string('address');
-            $table->enum('status', ['pending', 'active', 'completed', 'rejected']);
-            $table->float('min_salary')->from(1000);
-            $table->float('max_salary')->from(1000);
+            $table->string('address')->nullable();
+            $table->enum('status', ['pending', 'active', 'completed', 'rejected'])->default('pending');
+            $table->unsignedFloat('min_salary', 12)->from(1000);
+            $table->unsignedFloat('max_salary', 12)->from(1000);
             $table->timestamps();
         });
     }

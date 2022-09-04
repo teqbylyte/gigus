@@ -10,4 +10,13 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected function handleException(\Exception $e)
+    {
+        $msg = env('APP_ENV') == 'production' ?
+            'An error occurred.' : $e->getMessage();
+
+        \Log::error($msg);
+        return back()->with('error', $msg);
+    }
 }
