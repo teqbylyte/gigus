@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ModelHelper;
 use App\Helpers\RoleHelper;
+use App\Helpers\TagHelper;
 use App\Http\Requests\GigRequest;
 use App\Models\Company;
 use App\Models\Gig;
 use App\Models\Role;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -38,7 +40,8 @@ class GigController extends Controller
             $company = (new ModelHelper($request->company, new Company()))->getModel();
             $gig_data['company_id'] = $company->id;
 
-            Gig::query()->create($gig_data);
+            $new_gig = Gig::query()->create($gig_data);
+            TagHelper::attachGig($request->tags, $new_gig);
 
             return redirect()->route('gigs.index')->with('success', 'New Gig Created!');
         }

@@ -10,6 +10,8 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function gigs(): BelongsToMany
     {
         return $this->belongsToMany(Gig::class);
