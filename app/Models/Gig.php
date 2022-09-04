@@ -6,6 +6,7 @@ use App\Traits\Uid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Gig extends Model
 {
@@ -22,6 +23,12 @@ class Gig extends Model
     {
         return  $this->belongsTo(Role::class);
     }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
 
     public function scopeWithRelations($query)
     {
