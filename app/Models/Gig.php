@@ -14,6 +14,13 @@ class Gig extends Model
 
     protected $guarded = ['id'];
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where('uuid', $value)->firstOrFail();
+    }
+
+//    Relationships
+
     public function company(): BelongsTo
     {
         return  $this->belongsTo(Company::class);

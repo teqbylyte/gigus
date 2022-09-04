@@ -36,16 +36,31 @@ class GigController extends Controller
             $role = (new ModelHelper($request->role, new Role()))->getModel();
             $gig_data['role_id'] = $role->id;
 
-//            Get the role model for this gig
+//            Get the company model for this gig
             $company = (new ModelHelper($request->company, new Company()))->getModel();
             $gig_data['company_id'] = $company->id;
 
             $new_gig = Gig::query()->create($gig_data);
+
+//            attach gigs
             TagHelper::attachGig($request->tags, $new_gig);
 
             return redirect()->route('gigs.index')->with('success', 'New Gig Created!');
         }
         catch (\Exception $exception) {
+            return $this->handleException(e: $exception);
+        }
+    }
+
+    public function delete(Gig $gig)
+    {
+        try {
+            $gig->tags()->delete();
+            $gig->delete();
+
+            return back()->with('success', 'Gig deleted!');
+        }
+        catch (\Exception $exception){
             return $this->handleException(e: $exception);
         }
     }

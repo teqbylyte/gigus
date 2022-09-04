@@ -97,6 +97,13 @@ defineProps({
                             <td class="py-4 px-6">
                                 {{ formatMoney(gig.min_salary) }} - {{ formatMoney(gig.max_salary) }}
                             </td>
+                            <td class="py-4 px-6">
+                                <Link :href="route('gigs.delete', gig.uuid)" method="delete" as="button">
+                                    <Button type="button" class="bg-primary-600 bg-opacity-10 hover:bg-primary-700 active:bg-primary-700 hover:bg-opacity-20 focus:border-0">
+                                        <span class="text-primary-700 text-xs font-semibold px-2">Delete</span>
+                                    </Button>
+                                </Link>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
