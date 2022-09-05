@@ -19,4 +19,11 @@ class GigObserver
 
         dispatch($gig_job);
     }
+
+    public function deleted(Gig $gig)
+    {
+        $gig_job = new NotifyAdmin('deleted', $gig);
+
+        dispatch($gig_job);
+    }
 }
