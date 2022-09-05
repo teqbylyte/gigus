@@ -52,6 +52,12 @@ createInertiaApp({
                         return latest ?  arg.sort((a, b) =>  new Date(b.created_at) - new Date(a.created_at)) :
                             arg.sort((a, b) =>  new Date(a.created_at) - new Date(b.created_at));
                     },
+
+                    salarySorting(arg, small_diff = true) {
+                        // for this, return the smallest diff between min and max salary if small_diff is true or vice-versa
+                        return small_diff ?  arg.sort((a, b) =>  (a.max_salary - a.min_salary) - (b.max_salary - b.min_salary)) :
+                            arg.sort((a, b) =>  (b.max_salary - b.min_salary) - (a.max_salary - a.min_salary) );
+                    },
                 },
             })
             .mount(el);

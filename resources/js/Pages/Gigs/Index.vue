@@ -165,6 +165,10 @@ export default {
         sortSalary()
         {
             salary_sorted = !salary_sorted
+
+            this.allGigs = this.salarySorting(this.allGigs, salary_sorted);
+            this.otherGigs = this.salarySorting(this.otherGigs, salary_sorted);
+            this.rejectedGigs = this.salarySorting(this.rejectedGigs, salary_sorted);
         }
     }
 }
