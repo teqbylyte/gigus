@@ -5,6 +5,8 @@ import Input from "@/Components/Input.vue";
 import Label from "@/Components/Label.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 import InputError from "@/Components/InputError.vue";
+import vueCountryRegionSelect from 'vue-country-region-select'
+
 
 defineProps({
     gigs: Object
