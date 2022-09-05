@@ -12,23 +12,14 @@ defineProps({
 })
 
 const form = useForm({
-    // role: null,
-    // company: null,
-    // country: null,
-    // state: null,
-    // address: null,
-    // tags: null,
-    // min_salary: null,
-    // max_salary: null
-
-    role: 'Product Design',
-    company: 'Teqpace',
-    country: 'Nigeria',
-    state: 'Lagos',
-    address: '9 Akinlawanson',
-    tags: 'freelance, health',
-    min_salary: '90000',
-    max_salary: '1000000'
+    role: null,
+    company: null,
+    country: null,
+    state: null,
+    address: null,
+    tags: null,
+    min_salary: null,
+    max_salary: null
 });
 
 const submit = () => {

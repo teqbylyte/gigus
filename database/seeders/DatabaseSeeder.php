@@ -16,10 +16,19 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(2)->create();
         \App\Models\User::factory(2)->create(['role' => 'admin']);
+        \App\Models\User::factory(2)->create(['role' => 'super_admin']);
 
          \App\Models\User::factory()->create([
-             'name' => 'Lyte Onyema',
-             'email' => 'lyte.onyema@example.com',
+             'name' => 'Gigus Admin',
+             'email' => 'gigus@example.com',
+         ]);
+
+         $this->call([
+             CompanySeeder::class,
+             RoleSeeder::class,
+             GigSeeder::class,
+             TagSeeder::class,
+             CountrySeeder::class,
          ]);
     }
 }

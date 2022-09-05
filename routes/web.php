@@ -22,8 +22,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-        Route::put('/{gig}/update-status', 'updateStatus')->name('update-status');
-        Route::delete('/{gig}/delete', 'delete')->name('delete');
+        Route::put('/{gig}/update-status', 'updateStatus')->name('update-status')->can('update,gig');
+        Route::delete('/{gig}/delete', 'delete')->name('delete')->can('delete,gig');
     });
 });
 

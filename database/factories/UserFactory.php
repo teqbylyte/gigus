@@ -20,7 +20,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->safeEmail(),
-            'phone' => fake()->phoneNumber(),
+            'phone' => rand(10000000000, 99999999999),
             'role'  => 'staff',
             'email_verified_at' => now(),
             'password' => bcrypt('gigus4231'), // password

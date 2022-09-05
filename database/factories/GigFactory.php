@@ -28,6 +28,7 @@ class GigFactory extends Factory
             'country'   => fake()->country,
             'state'     => fake()->city,
             'address'   => fake()->streetAddress,
+            'status'    => ['pending', 'active', 'completed', 'rejected'][rand(0,3)],
             'min_salary'    => $min,
             'max_salary'    => $min + 15000
         ];

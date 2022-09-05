@@ -28,7 +28,7 @@ class NotifyAdmin implements ShouldQueue
      */
     public function __construct(public string $action, private array $gig, private User|Authenticatable $user)
     {
-        $this->admins = User::query()->where('role', 'admin')->get();
+        $this->admins = User::administrator()->get();
     }
 
     /**
