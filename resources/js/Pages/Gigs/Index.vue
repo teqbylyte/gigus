@@ -58,14 +58,14 @@ defineProps({
             <div class="overflow-x-auto relative">
                 <table class="w-full text-sm text-left text-gray-400">
                     <thead class="text-xs bg-transparent">
-                        <tr>
-                            <th scope="col" class="py-3 px-6">
-                                Role
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                Company
-                            </th>
-                            <th scope="col" class="py-3 px-6">
+                    <tr>
+                        <th scope="col" class="py-3 px-6">
+                            Role
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Company
+                        </th>
+                        <th scope="col" class="py-3 px-6">
                                     <span class="flex items-center">
                                         <span>Date</span>
                                         <span class="pl-1" @click="sortDate">
@@ -73,8 +73,8 @@ defineProps({
                                             <Icon class="text-xs font-bold text-primary-500">arrow_downward</Icon>
                                         </span>
                                     </span>
-                            </th>
-                            <th scope="col" class="py-3 px-6">
+                        </th>
+                        <th scope="col" class="py-3 px-6">
                                 <span class="flex items-center">
                                     <span>Salary($)</span>
                                     <span class="pl-1" @click="sortSalary">
@@ -82,28 +82,28 @@ defineProps({
                                         <Icon class="text-xs font-bold  text-primary-500">arrow_downward</Icon>
                                     </span>
                                 </span>
-                            </th>
-                        </tr>
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
                     <tr v-if="gigs.length > 0" class="bg-white border-y-8 border-gray-100  text-gray-700 rounded-[40px]"
                         v-for="gig in active_tab === 'rejected' ? rejectedGigs : ( active_tab === 'other-gigs' ? otherGigs : allGigs)"
                     >
-                        <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap ">
+                        <th scope="row" class="py-2 px-6 font-medium whitespace-nowrap ">
                             {{ gig.role.name }}
                         </th>
-                        <td class="py-4 px-6">
+                        <td class="py-2 px-6">
                             {{ gig.company.name  }}
                         </td>
-                        <td class="py-4 px-6">
+                        <td class="py-2 px-6">
                             {{  formatDate(gig.created_at, false, 'Do MMMM, YYYY') }}
                         </td>
-                        <td class="py-4 px-6">
+                        <td class="py-2 px-6">
                             {{ formatMoney(gig.min_salary) }} - {{ formatMoney(gig.max_salary) }}
                         </td>
-                        <td class="py-4 px-6">
+                        <td class="py-2">
                             <Link :href="route('gigs.delete', gig.uuid)" method="delete" as="button">
-                                <Button type="button" class="bg-primary-600 bg-opacity-10 hover:bg-primary-700 active:bg-primary-700 hover:bg-opacity-20 focus:border-0">
+                                <Button type="button" class="bg-primary-600 bg-opacity-10 rounded-[5px] py-1 hover:bg-primary-700 active:bg-primary-700 hover:bg-opacity-20 focus:border-0">
                                     <span class="text-primary-700 text-xs font-semibold px-2">Delete</span>
                                 </Button>
                             </Link>
@@ -169,4 +169,5 @@ export default {
     }
 }
 </script>
+
 
