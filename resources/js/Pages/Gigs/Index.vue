@@ -35,6 +35,7 @@ defineProps({
                     <div class="w-full">
                         <NavLink href="#" id="all_gigs" :active="active_tab === 'all'" @click="filterGigs">
                             <span class="pb-3 px-3 font-bold">All Gigs</span>
+                            <span class="mb-3 px-4 text-[10px] font-semibold rounded-md text-white" :class="active_tab === 'all' ? 'bg-primary-500' : 'bg-primary-600 bg-opacity-10 text-primary-600'">{{ allGigs.length }}</span>
                         </NavLink>
                     </div>
 
@@ -42,12 +43,14 @@ defineProps({
                     <div class="w-full">
                         <NavLink href="#" id="my_gigs" :active="active_tab === 'other-gigs'" @click="filterGigs('other-gigs')">
                             <span class="pb-3 px-3 font-bold">My Gigs</span>
+                            <span class="mb-3 px-4 text-[10px] font-semibold rounded-md text-white" :class="active_tab === 'other-gigs' ? 'bg-primary-500' : 'bg-primary-600 bg-opacity-10 text-primary-600'">{{ otherGigs.length }}</span>
                         </NavLink>
                     </div>
 
                     <div class="w-full">
                         <NavLink href="#" id="rejected_gigs" :active="active_tab === 'rejected'" @click="filterGigs('rejected')">
                             <span class="pb-3 px-3 font-bold">Rejected Gigs</span>
+                            <span class="mb-3 px-4 text-[10px] font-semibold rounded-md text-white" :class="active_tab === 'rejected' ? 'bg-primary-500' : 'bg-primary-600 bg-opacity-10 text-primary-600'">{{ rejectedGigs.length }}</span>
                         </NavLink>
                     </div>
                 </div>
@@ -66,22 +69,22 @@ defineProps({
                             Company
                         </th>
                         <th scope="col" class="py-3 px-6">
-                                    <span class="flex items-center">
-                                        <span>Date</span>
-                                        <span class="pl-1" @click="sortDate">
-                                            <Icon class="text-xs font-bold text-primary-500">arrow_upward</Icon>
-                                            <Icon class="text-xs font-bold text-primary-500">arrow_downward</Icon>
-                                        </span>
-                                    </span>
+                            <span class="flex items-center">
+                                <span>Date</span>
+                                <span class="pl-1" @click="sortDate">
+                                    <Icon class="text-xs font-bold text-primary-500">arrow_upward</Icon>
+                                    <Icon class="text-xs font-bold text-primary-500">arrow_downward</Icon>
+                                </span>
+                            </span>
                         </th>
                         <th scope="col" class="py-3 px-6">
-                                <span class="flex items-center">
-                                    <span>Salary($)</span>
-                                    <span class="pl-1" @click="sortSalary">
-                                        <Icon class="text-xs font-bold text-primary-500">arrow_upward</Icon>
-                                        <Icon class="text-xs font-bold  text-primary-500">arrow_downward</Icon>
-                                    </span>
+                            <span class="flex items-center">
+                                <span>Salary($)</span>
+                                <span class="pl-1" @click="sortSalary">
+                                    <Icon class="text-xs font-bold text-primary-500">arrow_upward</Icon>
+                                    <Icon class="text-xs font-bold  text-primary-500">arrow_downward</Icon>
                                 </span>
+                            </span>
                         </th>
                     </tr>
                     </thead>

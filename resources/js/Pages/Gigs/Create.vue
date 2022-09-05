@@ -177,14 +177,19 @@ export default {
     },
 
     created() {
-        fetch(this.appUrl + '/api/countries' ).then(
-            res => res.json()).then(
-                data => {
-                    this.countries = data;
-                })
+        this.fetchCountries();
     },
 
     methods: {
+        fetchCountries()
+        {
+            fetch(this.appUrl + '/api/countries' ).then(
+                res => res.json()).then(
+                data => {
+                    this.countries = data;
+                })
+        },
+
         fetchStates() {
 
             fetch(this.appUrl + '/api/countries/' + this.form.country + '/states').then(

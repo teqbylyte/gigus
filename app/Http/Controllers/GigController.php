@@ -45,7 +45,7 @@ class GigController extends Controller
 //            attach gigs
             TagHelper::attachGig($request->tags, $new_gig);
 
-//            notify admin from GigObserver class
+//            notify admin from the GigObserver class
 
             return redirect()->route('gigs.index')->with('success', 'New Gig Created!');
         }
@@ -59,6 +59,7 @@ class GigController extends Controller
         try {
             $gig = Gig::find($gig->id);
 
+//            delete the corresponding relationship with the tags model
             $gig->tags()->delete();
             $gig->delete();
 

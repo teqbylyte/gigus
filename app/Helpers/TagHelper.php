@@ -25,7 +25,7 @@ class TagHelper
             $t = Tag::query()->where('name', $tag)->select('id')->first();
 
 //            Create tag if it doesn't exist
-            $t = is_null($t) ? Tag::query()->create(['name' => $tag]) : $t;
+            $t = $t ?? Tag::query()->create(['name' => $tag]);
 
             $tag_ids[] = $t->id;
         });
