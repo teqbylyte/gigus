@@ -45,6 +45,8 @@ class GigController extends Controller
 //            attach gigs
             TagHelper::attachGig($request->tags, $new_gig);
 
+//            notify admin from GigObserver class
+
             return redirect()->route('gigs.index')->with('success', 'New Gig Created!');
         }
         catch (\Exception $exception) {
