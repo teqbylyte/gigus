@@ -3,8 +3,11 @@
 namespace App\Notifications;
 
 use App\Models\Gig;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -13,13 +16,13 @@ class GigAction extends Notification
     use Queueable;
 
     /**
-     * Create a new notification instance.
+     * Create a new notification instance for the gig array containing the necessary of the info.
      *
      * @return void
      */
-    public function __construct(public string $action, private Gig $gig)
+    public function __construct(public string $action, private array $gig, private Authenticatable|User $user)
     {
-        //
+
     }
 
     /**
@@ -41,26 +44,23 @@ class GigAction extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        $user = auth()->user();
-
         return $this->action == 'created' ?
             (new MailMessage)
                 ->subject('Gig Created')
                 ->greeting('Hello Admin,')
-                ->line('A new gig has been created by ' . $user->name)
-                ->line('Gig role: ' . $this->gig->role->name )
-                ->line('Gig Company: ' . $this->gig->company->name )
-                ->line('Salary: ' . moneyFormat($this->gig->min_salary ). ' - ' . moneyFormat($this->gig->max_salary ))
-                ->action('View gig', url(route('gigs.index')))  // Normally, this would point to the gig instance instead of all gigs
-                ->line('Thank you!'):
+                ->line('A new gig has been created by ' . $this->user->name)
+                ->line('Gig role: ' . $this->gig['role_name'] )
+                ->line('Gig Company: ' . $this->gig['company_name'] )
+                ->line('Salary: ' . moneyFormat($this->gig['min_salary']) . ' - ' . moneyFormat($this->gig['max_salary']) )
+                ->line('Thank you!') :
 
             (new MailMessage)
                 ->subject('Gig Deleted')
                 ->greeting('Hello Admin,')
-                ->line('A gig has been deleted by ' . $user->name)
-                ->line('Gig role: ' . $this->gig->role->name )
-                ->line('Gig Company: ' . $this->gig->company->name )
-                ->line('Salary: ' . moneyFormat($this->gig->min_salary) . ' - ' . moneyFormat($this->gig->max_salary) )
+                ->line('A gig has been deleted by ' . $this->user->name)
+                ->line('Gig role: ' . $this->gig['role_name'] )
+                ->line('Gig Company: ' . $this->gig['company_name'] )
+                ->line('Salary: ' . moneyFormat($this->gig['min_salary']) . ' - ' . moneyFormat($this->gig['max_salary']) )
                 ->line('Thank you!');
     }
 

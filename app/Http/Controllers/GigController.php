@@ -57,6 +57,8 @@ class GigController extends Controller
     public function delete(Gig $gig)
     {
         try {
+            $gig = Gig::find($gig->id);
+
             $gig->tags()->delete();
             $gig->delete();
 

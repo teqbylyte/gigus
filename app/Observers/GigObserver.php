@@ -15,15 +15,24 @@ class GigObserver
      */
     public function created(Gig $gig)
     {
-        $gig_job = new NotifyAdmin('created', $gig);
+        $gig_job = new NotifyAdmin('created', $this->getGigInfo($gig), auth()->user());
 
         dispatch($gig_job);
     }
 
     public function deleted(Gig $gig)
     {
-        $gig_job = new NotifyAdmin('deleted', $gig);
+        $gig_job = new NotifyAdmin('deleted', $this->getGigInfo($gig), auth()->user());
 
         dispatch($gig_job);
+    }
+
+    private function getGigInfo(Gig $gig)
+    {
+        $info = $gig->only('min_salary', 'max_salary', 'uuid', 'id');
+        $info['company_name'] = $gig->company->name;
+        $info['role_name'] = $gig->role->name;
+
+        return $info;
     }
 }

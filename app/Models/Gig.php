@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\FileHelper;
+use App\Jobs\NotifyAdmin;
 use App\Traits\Uid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
