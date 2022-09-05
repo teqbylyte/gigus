@@ -54,6 +54,8 @@ class GigRequest extends FormRequest
      */
     public function updateGig(): array
     {
-        return [];
+        return [
+            'status' => 'required|in:pending,active,completed,rejected'
+        ];
     }
 }

@@ -2,6 +2,8 @@
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import Button from "@/Components/Button.vue";
 import NavLink from "@/Components/NavLink.vue";
+import Dropdown from "@/Components/Dropdown.vue";
+import DropdownLink from "@/Components/DropdownLink.vue";
 
 defineProps({
     gigs: Object
@@ -104,6 +106,44 @@ defineProps({
                         <td class="py-2 px-6">
                             {{ formatMoney(gig.min_salary) }} - {{ formatMoney(gig.max_salary) }}
                         </td>
+                        <td>
+                            <Dropdown align="right" width="48">
+                                <template #trigger>
+                                        <span class="inline-flex rounded-md">
+                                            <Button type="button" class="bg-primary-600 bg-opacity-10 rounded-[5px] py-1 hover:bg-primary-700 active:bg-primary-700 hover:bg-opacity-20 focus:border-0">
+                                                    <span class="text-primary-700 text-xs font-semibold">{{ gig.status.toString().replace(/^./, gig.status.toString()[0].toUpperCase())}}</span>
+
+                                                    <span class="text-primary-700">
+                                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                        </svg>
+                                                    </span>
+                                            </Button>
+                                        </span>
+                                </template>
+
+                                <template #content>
+                                    <DropdownLink v-if="gig.status !== 'pending'" :href="route('gigs.update-status', gig.uuid)"
+                                                  :data="{'status': 'pending'}" method="put" as="button"
+                                    >
+                                        Pending
+                                    </DropdownLink>
+                                    <DropdownLink v-if="gig.status !== 'active'" :href="route('gigs.update-status', gig.uuid)"
+                                                  :data="{'status': 'active'}" method="put" as="button"
+                                    >
+                                        Active
+                                    </DropdownLink>
+                                    <DropdownLink v-if="gig.status !== 'completed'" :href="route('gigs.update-status', gig.uuid)"
+                                                  :data="{'status': 'completed'}" method="put" as="button">
+                                        Completed
+                                    </DropdownLink>
+                                    <DropdownLink v-if="gig.status !== 'rejected'" :href="route('gigs.update-status', gig.uuid)"
+                                                  :data="{'status': 'rejected'}" method="put" as="button">
+                                        Rejected
+                                    </DropdownLink>
+                                </template>
+                            </Dropdown>
+                        </td>
                         <td class="py-2">
                             <Link :href="route('gigs.delete', gig.uuid)" method="delete" as="button">
                                 <Button type="button" class="bg-primary-600 bg-opacity-10 rounded-[5px] py-1 hover:bg-primary-700 active:bg-primary-700 hover:bg-opacity-20 focus:border-0">
@@ -121,8 +161,6 @@ defineProps({
 
 <script>
 
-import {usePage} from "@inertiajs/inertia-vue3";
-
 let active_tab = 'all';
 let date_sorted = true;
 let salary_sorted = false;
@@ -132,9 +170,18 @@ export default {
         return {
             active_tab,
             date_sorted,
-            allGigs: this.gigs,
-            rejectedGigs: this.gigs.filter(g => g.status === 'rejected'),
-            otherGigs: this.gigs.filter(g => g.status !== 'rejected'),
+        }
+    },
+
+    computed: {
+        allGigs() {
+            return this.gigs
+        },
+        rejectedGigs() {
+            return this.gigs.filter(g => g.status === 'rejected')
+        },
+        otherGigs() {
+            return this.gigs.filter(g => g.status !== 'rejected')
         }
     },
 

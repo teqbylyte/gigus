@@ -54,6 +54,19 @@ class GigController extends Controller
         }
     }
 
+    public function updateStatus(GigRequest $request, Gig $gig)
+    {
+        try {
+            $gig->status = $request->status;
+            $gig->save();
+
+            return back()->with('success', 'Gig status updated!');
+        }
+        catch (\Exception $exception){
+            return $this->handleException(e: $exception);
+        }
+    }
+
     public function delete(Gig $gig)
     {
         try {
