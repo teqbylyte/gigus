@@ -14,13 +14,15 @@ class GigPolicy
     /**
      * Determine whether the user can update the gig by checking if they're not staff.
      *
+     * Also, no need to update a rejected gig anymore
+     *
      * @param User $user
      * @param Gig $gig
      * @return Response|bool
      */
     public function update(User $user, Gig $gig): Response|bool
     {
-        return $user->role != 'staff';
+        return $user->role != 'staff' || $gig->status = 'rejected';
     }
 
     /**

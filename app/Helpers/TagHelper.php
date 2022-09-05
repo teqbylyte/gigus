@@ -11,6 +11,8 @@ class TagHelper
     /**
      * Attach the defined gig to the tags
      *
+     * Normally, tags input would be a multiselect to allow multiple tags, for now we all with separation by comma in a text input
+     *
      * @param array<string,string>|string $tags Tags can either be an array of strings or strings separated by comma depending on the frontend implementation.
      * @param Gig $gig
      */

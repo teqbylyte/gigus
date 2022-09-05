@@ -30,7 +30,7 @@ class GigFactory extends Factory
             'address'   => fake()->streetAddress,
             'status'    => ['pending', 'active', 'completed', 'rejected'][rand(0,3)],
             'min_salary'    => $min,
-            'max_salary'    => $min + 15000
+            'max_salary'    => $min + rand(13000, 15000)
         ];
     }
 }

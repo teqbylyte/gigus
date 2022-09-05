@@ -48,7 +48,7 @@ const submit = () => {
 
             <div class="flex flex-col md:flex-row">
                 <div>
-                    <div class="bg-white p-4 pr-8 rounded-lg text-xs text-slate-400 shadow-md">
+                    <div class="bg-white p-4 pr-8 rounded-lg text-xs text-slate-400 shadow-lg">
                         <div class="px-5 py-2">Basic</div>
                         <div class="px-5 py-5 ">Renumeration</div>
                     </div>
@@ -114,13 +114,15 @@ const submit = () => {
                                 <div class="col-span-1">
                                     <Label class="text-xs text-slate-400">Add tags</Label>
                                     <Input id="tags" type="text" class="mt-1 block w-full text-slate-700"
+                                           placeholder="Enter multiple tags by separating with comma"
                                            v-model="form.tags"
                                             />
+                                    <span class="text-xs text-slate-400">Suggested tags: full time, contract, freelance</span>
                                     <InputError class="mt-2" :message="form.errors.tags" />
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 mb-8">
+                            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 mb-8 mt-3">
                                 <div class="col-span-2">
                                     <Label class="text-xs text-slate-400">Salary</Label>
                                 </div>
