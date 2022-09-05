@@ -8,7 +8,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import moment from "moment";
 import Icon from "/resources/js/Components/Icon.vue"
-import process from "@inertiajs/inertia-vue3/.eslintrc";
+
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'GIGUS';
 const baseUrl = window.location.origin;
@@ -32,6 +32,9 @@ createInertiaApp({
                     appUrl() {
                         return baseUrl;
                     },
+                    flash() {
+                        return this.$page.props.flash
+                    }
                 },
 
                 methods: {

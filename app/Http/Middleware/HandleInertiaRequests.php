@@ -43,6 +43,24 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'flash' => $this->getFlashMessage($request),
         ]);
+    }
+
+    private function getFlashMessage(Request $request): array
+    {
+        if ($request->session()->has('error')) {
+            return ['error' => $request->session()->get('error')];
+        }
+
+        if ($request->session()->has('success')) {
+            return  ['success' => $request->session()->get('success')];
+        }
+
+        if ($request->session()->has('message')) {
+            return  ['message' => $request->session()->get('message')];
+        }
+
+        return [];
     }
 }
