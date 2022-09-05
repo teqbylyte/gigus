@@ -15,16 +15,16 @@ class GigObserver
      */
     public function created(Gig $gig)
     {
-        $gig_job = new NotifyAdmin('created', $this->getGigInfo($gig), auth()->user());
-
-        dispatch($gig_job);
+//        $gig_job = new NotifyAdmin('created', $this->getGigInfo($gig), auth()->user());
+//
+//        dispatch($gig_job);
     }
 
     public function deleted(Gig $gig)
     {
-        $gig_job = new NotifyAdmin('deleted', $this->getGigInfo($gig), auth()->user());
-
-        dispatch($gig_job);
+//        $gig_job = new NotifyAdmin('deleted', $this->getGigInfo($gig), auth()->user());
+//
+//        dispatch($gig_job);
     }
 
     private function getGigInfo(Gig $gig)
