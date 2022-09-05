@@ -90,14 +90,24 @@ const submit = () => {
                                 </div>
 
                                 <div class="col-span-1">
-                                    <Input id="country" type="text" class="mt-1 block w-full text-slate-700"
-                                            autocomplete="state" v-model="form.country" />
+                                    <select id="country" v-model="form.country"
+                                            @change="fetchStates()"
+                                            class="border-gray-100 focus:border-primary-200 focus:ring-primary-100 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full text-slate-700"
+                                    >
+                                        <option :value="null" key="0" selected disabled>Country</option>
+                                        <option v-for="country in countries" :key="country.id"
+                                                :value="country.name">{{ country.name }}</option>
+                                    </select>
                                     <InputError class="mt-2" :message="form.errors.country" />
                                 </div>
 
                                 <div class="col-span-1 ml-3">
-                                    <Input id="state" type="text" class="mt-1 block w-full text-slate-700"
-                                            autocomplete="state" v-model="form.state" />
+                                    <select id="country" v-model="form.state" placeholder="Hi"
+                                            class="border-gray-100 focus:border-primary-200 focus:ring-primary-100 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full text-slate-700"
+                                    >
+                                        <option :value="null" disabled selected>State/Region</option>
+                                        <option v-for="state in states" :key="state.id" :value="state.name">{{ state.name }}</option>
+                                    </select>
                                     <InputError class="mt-2" :message="form.errors.state" />
                                 </div>
 
@@ -156,3 +166,33 @@ const submit = () => {
         </section>
     </BreezeAuthenticatedLayout>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            countries: [],
+            states: []
+        }
+    },
+
+    created() {
+        fetch(this.appUrl + '/api/countries' ).then(
+            res => res.json()).then(
+                data => {
+                    this.countries = data;
+                })
+    },
+
+    methods: {
+        fetchStates() {
+
+            fetch(this.appUrl + '/api/countries/' + this.form.country + '/states').then(
+                res => res.json()).then(
+                    data => {
+                        this.states = data
+                    })
+        }
+    }
+}
+</script>

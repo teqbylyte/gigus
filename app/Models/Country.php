@@ -10,6 +10,11 @@ class Country extends Model
 {
     use HasFactory;
 
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where('name', $value)->firstOrFail();
+    }
+
     public function states(): HasMany
     {
         return $this->hasMany(State::class);

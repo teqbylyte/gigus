@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth')->controller(CountryController::class)->group(function () {
+Route::controller(CountryController::class)->group(function () {
     Route::get('/countries', 'getCountries');
     Route::get('/countries/{country}/states','getStates');
 });
