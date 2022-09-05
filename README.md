@@ -1,6 +1,6 @@
 #<a href="#" target="_blank">GIGUS</a>
 
-This is an organisation management system for gigs.
+This is an organisational management system for gigs.
 
 This is a single page laravel application built with vue and Inertia. To install the project, please use the steps below
 
