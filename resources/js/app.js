@@ -39,7 +39,13 @@ createInertiaApp({
 
                     formatMoney(value) {
                         return new Intl.NumberFormat().format(value)
-                    }
+                    },
+
+                    dateSorting(arg, latest = true) {
+                        // If sorting should be done, return the latest, else return the normal order
+                        return latest ?  arg.sort((a, b) =>  new Date(b.created_at) - new Date(a.created_at)) :
+                            arg.sort((a, b) =>  new Date(a.created_at) - new Date(b.created_at));
+                    },
                 },
             })
             .mount(el);

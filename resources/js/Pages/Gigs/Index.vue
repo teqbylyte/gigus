@@ -68,7 +68,7 @@ defineProps({
                             <th scope="col" class="py-3 px-6">
                                     <span class="flex items-center">
                                         <span>Date</span>
-                                        <span class="pl-1">
+                                        <span class="pl-1" @click="sortDate">
                                             <Icon class="text-xs font-bold text-primary-500">arrow_upward</Icon>
                                             <Icon class="text-xs font-bold text-primary-500">arrow_downward</Icon>
                                         </span>
@@ -77,7 +77,7 @@ defineProps({
                             <th scope="col" class="py-3 px-6">
                                 <span class="flex items-center">
                                     <span>Salary($)</span>
-                                    <span class="pl-1">
+                                    <span class="pl-1" @click="sortSalary">
                                         <Icon class="text-xs font-bold text-primary-500">arrow_upward</Icon>
                                         <Icon class="text-xs font-bold  text-primary-500">arrow_downward</Icon>
                                     </span>
@@ -86,49 +86,9 @@ defineProps({
                         </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="active_tab === 'other-gigs'" v-for="gig in otherGigs" class="bg-white border-y-8 border-gray-100  text-gray-700 rounded-[40px]">
-                        <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap ">
-                            {{ gig.role.name }}
-                        </th>
-                        <td class="py-4 px-6">
-                            {{ gig.company.name  }}
-                        </td>
-                        <td class="py-4 px-6">
-                            {{  formatDate(gig.created_at, false, 'Do MMMM, YYYY') }}
-                        </td>
-                        <td class="py-4 px-6">
-                            {{ formatMoney(gig.min_salary) }} - {{ formatMoney(gig.max_salary) }}
-                        </td>
-                        <td class="py-4 px-6">
-                            <Link :href="route('gigs.delete', gig.uuid)" method="delete" as="button">
-                                <Button type="button" class="bg-primary-600 bg-opacity-10 hover:bg-primary-700 active:bg-primary-700 hover:bg-opacity-20 focus:border-0">
-                                    <span class="text-primary-700 text-xs font-semibold px-2">Delete</span>
-                                </Button>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr v-else-if="active_tab === 'rejected'" v-for="gig in rejectedGigs" class="bg-white border-y-8 border-gray-100  text-gray-700 rounded-[40px]">
-                        <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap ">
-                            {{ gig.role.name }}
-                        </th>
-                        <td class="py-4 px-6">
-                            {{ gig.company.name  }}
-                        </td>
-                        <td class="py-4 px-6">
-                            {{  formatDate(gig.created_at, false, 'Do MMMM, YYYY') }}
-                        </td>
-                        <td class="py-4 px-6">
-                            {{ formatMoney(gig.min_salary) }} - {{ formatMoney(gig.max_salary) }}
-                        </td>
-                        <td class="py-4 px-6">
-                            <Link :href="route('gigs.delete', gig.uuid)" method="delete" as="button">
-                                <Button type="button" class="bg-primary-600 bg-opacity-10 hover:bg-primary-700 active:bg-primary-700 hover:bg-opacity-20 focus:border-0">
-                                    <span class="text-primary-700 text-xs font-semibold px-2">Delete</span>
-                                </Button>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr v-else v-for="gig in allGigs" class="bg-white border-y-8 border-gray-100  text-gray-700 rounded-[40px]">
+                    <tr v-if="gigs.length > 0" class="bg-white border-y-8 border-gray-100  text-gray-700 rounded-[40px]"
+                        v-for="gig in active_tab === 'rejected' ? rejectedGigs : ( active_tab === 'other-gigs' ? otherGigs : allGigs)"
+                    >
                         <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap ">
                             {{ gig.role.name }}
                         </th>
@@ -158,28 +118,20 @@ defineProps({
 
 <script>
 
-let current_tab = 'all';
+import {usePage} from "@inertiajs/inertia-vue3";
+
+let active_tab = 'all';
+let date_sorted = true;
+let salary_sorted = false;
 
 export default {
     data() {
         return {
-            page_gigs: this.allGigs,
-
-            active_tab: current_tab,
-        }
-    },
-
-    computed: {
-        allGigs() {
-            return this.gigs;
-        },
-
-        rejectedGigs() {
-            return this.gigs.filter(g => g.status === 'rejected');
-        },
-
-        otherGigs() {
-            return this.gigs.filter(g => g.status !== 'rejected');
+            active_tab,
+            date_sorted,
+            allGigs: this.gigs,
+            rejectedGigs: this.gigs.filter(g => g.status === 'rejected'),
+            otherGigs: this.gigs.filter(g => g.status !== 'rejected'),
         }
     },
 
@@ -188,17 +140,31 @@ export default {
         {
             switch (status) {
                 case 'rejected':
-                    current_tab = 'rejected';
+                    active_tab = 'rejected';
                     break;
 
                 case 'other-gigs':
-                    current_tab = 'other-gigs'
+                    active_tab = 'other-gigs'
                     break;
 
                 default:
-                    current_tab = 'all'
+                    active_tab = 'all'
                     break;
             }
+        },
+
+        sortDate()
+        {
+            date_sorted = !date_sorted;
+
+            this.allGigs = this.dateSorting(this.allGigs, date_sorted);
+            this.otherGigs = this.dateSorting(this.otherGigs, date_sorted);
+            this.rejectedGigs = this.dateSorting(this.rejectedGigs, date_sorted);
+        },
+
+        sortSalary()
+        {
+            salary_sorted = !salary_sorted
         }
     }
 }
