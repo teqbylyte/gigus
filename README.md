@@ -22,7 +22,7 @@ npm run dev
 php artisan queue:work
 ```
 
-7. If you're not using laravel valet, run
+8. If you're not using laravel valet, run
 ```
 php artisan serve
 ```
