@@ -50,20 +50,26 @@ const status_rejected = computed(() => props.status === 'rejected');
         <template #content v-if="!status_rejected">
             <DropdownLink v-if="status !== 'pending'" :href="route"
                           :data="{'status': 'pending'}" method="put" as="button"
+                          class="text-purple-600 hover:bg-purple-100/70"
             >
                 Pending
             </DropdownLink>
             <DropdownLink v-if="status !== 'active'" :href="route"
                           :data="{'status': 'active'}" method="put" as="button"
+                          class="text-blue-600 hover:bg-blue-100/70"
             >
                 Active
             </DropdownLink>
             <DropdownLink v-if="status !== 'completed'" :href="route"
-                          :data="{'status': 'completed'}" method="put" as="button">
+                          :data="{'status': 'completed'}" method="put" as="button"
+                          class="text-green-600 hover:bg-green-100/70"
+            >
                 Completed
             </DropdownLink>
             <DropdownLink v-if="status !== 'rejected'" :href="route"
-                          :data="{'status': 'rejected'}" method="put" as="button">
+                          :data="{'status': 'rejected'}" method="put" as="button"
+                          class="text-red-600 hover:bg-red-100/70"
+            >
                 Rejected
             </DropdownLink>
         </template>

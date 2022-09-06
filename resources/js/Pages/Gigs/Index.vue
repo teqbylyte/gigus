@@ -87,6 +87,9 @@ defineProps({
                                 </span>
                             </span>
                         </th>
+                        <th scope="col" class="py-3 px-6">
+                            Status
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
