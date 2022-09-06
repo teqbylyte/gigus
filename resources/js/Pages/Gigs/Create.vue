@@ -39,23 +39,23 @@ const submit = () => {
             </div>
         </template>
 
-        <section class="px-12">
+        <section class="px-3 sm:px-12">
             <div class="pb-5">
                 <p>New gig</p>
             </div>
 
 <!--            Gigs form-->
 
-            <div class="flex flex-col md:flex-row">
-                <div>
+            <div class="lg:flex lg:flex-row">
+                <div class="w-48 mb-8 lg:mb-0">
                     <div class="bg-white p-4 pr-8 rounded-lg text-xs text-slate-400 shadow-lg">
                         <div class="px-5 py-2">Basic</div>
                         <div class="px-5 py-5 ">Renumeration</div>
                     </div>
                 </div>
 
-                <div class="mx-7 w-6/12 lg:w-7/12 md:w-9/12 w-full">
-                    <div class="bg-white w-full py-10 pl-10 pr-20 rounded-lg text-xs text-slate-400 shadow-sm">
+                <div class="lg:mx-7 w-[350px] sm:w-[548px] lg:w-[700px] md:w-[650px] w-full lg:mt-0 mt-8">
+                    <div class="bg-white w-full py-10 px-5 sm:px-8 md:pl-10 md:pr-20 rounded-lg text-xs text-slate-400 shadow-sm">
                         <form @submit.prevent="submit">
                             <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 mb-8">
                                 <div class="col-span-1">
@@ -66,7 +66,7 @@ const submit = () => {
                                     <InputError class="mt-2" :message="form.errors.role" />
                                 </div>
 
-                                <div class="col-span-1 ml-2">
+                                <div class="col-span-1 sm:ml-2">
                                     <Label class="text-xs text-slate-400">Company</Label>
                                     <Input id="company" type="text" class="mt-1 block w-full text-slate-700"
                                            placeholder="Company" v-model="form.company" autocomplete="company"
@@ -80,7 +80,7 @@ const submit = () => {
                                     <Label class="text-xs text-slate-400">Location</Label>
                                 </div>
 
-                                <div class="col-span-1">
+                                <div class="sm:col-span-1 col-span-2">
                                     <select id="country" v-model="form.country"
                                             @change="fetchStates()"
                                             class="border-gray-100 focus:border-primary-200 focus:ring-primary-100 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full text-slate-700"
@@ -92,7 +92,7 @@ const submit = () => {
                                     <InputError class="mt-2" :message="form.errors.country" />
                                 </div>
 
-                                <div class="col-span-1 ml-3">
+                                <div class="sm:col-span-1 col-span-2 sm:ml-3">
                                     <select id="country" v-model="form.state" placeholder="Hi"
                                             class="border-gray-100 focus:border-primary-200 focus:ring-primary-100 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full text-slate-700"
                                     >
@@ -122,7 +122,7 @@ const submit = () => {
                                 </div>
                             </div>
 
-                            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 mb-8 mt-3">
+                            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 mb-8 mt-5">
                                 <div class="col-span-2">
                                     <Label class="text-xs text-slate-400">Salary</Label>
                                 </div>
