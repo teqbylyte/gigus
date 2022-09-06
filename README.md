@@ -16,7 +16,7 @@ npm run dev
 ```
 4. Next, check the Seeder and your db table for user credentials to login.
 5. Uncomment the update and delete methods code blocks in GigObserver to enable job queueing.
-6. Set up your mail configuration
+6. Set up your mail configuration in `.env` (important for mailing)
 7. Run
 ```
 php artisan queue:work
